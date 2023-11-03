@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:traveloi/src/controller/auth_controller/register_controller/register_controller.dart';
+import 'package:traveloi/src/view/bottom_viewer/bottom_viewer.dart';
 
 part 'register_event.dart';
 part 'register_state.dart';
@@ -22,7 +23,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         event.password.isNotEmpty) {
       if (event.email.contains("@") && event.email.contains(".com")) {
         var registerResponse = await RegisterController()
-            .registerAUser(event.email, event.password);
+            .registerAUser(event.fullName, event.email, event.password);
 
         if (registerResponse is String) {
           emit(RegisterInitial());
@@ -32,8 +33,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           emit(RegisterMsgState(
               isError: false, msg: "Account created, redirecting to homepage"));
           await Future.delayed(Duration(seconds: 2));
-          Navigator.pushNamedAndRemoveUntil(
-              event.context, "/home", (route) => false);
+          Navigator.pushAndRemoveUntil(
+              event.context,
+              MaterialPageRoute(builder: (context) => BottomViewer()),
+              (route) => false);
         } else {
           emit(RegisterInitial());
           emit(RegisterMsgState(

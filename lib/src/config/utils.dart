@@ -5,8 +5,12 @@ import 'package:flutter/material.dart';
 Color appColorFirst = Color(0xff0172B2);
 
 Color appColorSec = Color(0xff001645);
+Color appColorThird = Color(0xffFF0000);
 
-List popularPlaceList = ["Most Viewed", "Nearby", "Latest"];
+String popularPlaceList = "All Places";
+
+String noProfileImage =
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
 
 ThemeData appTheme = ThemeData(
     colorScheme: ColorScheme.fromSeed(seedColor: appColorFirst),
@@ -25,4 +29,16 @@ Messenger(BuildContext context, String msg, bool isError) {
     ),
     backgroundColor: isError ? Colors.redAccent : appColorFirst,
   ));
+}
+
+defaultIndicator(String? msg) {
+  return Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CircularProgressIndicator(),
+        msg != null ? Text(msg) : SizedBox()
+      ],
+    ),
+  );
 }

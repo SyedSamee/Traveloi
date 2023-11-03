@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:traveloi/src/controller/auth_controller/login_controller/login_controller.dart';
+import 'package:traveloi/src/view/bottom_viewer/bottom_viewer.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
@@ -19,20 +21,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     emit(LoginLoadingState());
     if (event.email.isNotEmpty && event.password.isNotEmpty) {
       if (event.email.contains("@") && event.email.contains(".com")) {
-        var registerResponse =
+        var loginResponse =
             await LoginController().loginAUser(event.email, event.password);
 
-        if (registerResponse is String) {
+        if (loginResponse is String || loginResponse is FirebaseException) {
           emit(LoginInitial());
           // same sort of error occured showing the error
-          emit(LoginMsgState(isError: true, msg: registerResponse));
-        } else if (registerResponse == true) {
+          emit(LoginMsgState(isError: true, msg: loginResponse.toString()));
+        } else if (loginResponse == true) {
           emit(LoginMsgState(
               isError: false,
               msg: "Log in successful, redirecting to homepage"));
           await Future.delayed(Duration(seconds: 2));
-          Navigator.pushNamedAndRemoveUntil(
-              event.context, "/home", (route) => false);
+          Navigator.pushAndRemoveUntil(
+              event.context,
+              MaterialPageRoute(builder: (context) => BottomViewer()),
+              (route) => false);
         } else {
           emit(LoginInitial());
           emit(LoginMsgState(

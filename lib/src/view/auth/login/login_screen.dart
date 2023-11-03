@@ -69,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 child: TextField(
+                    controller: email,
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 15),
                         hintText: "Email",
@@ -88,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 child: TextField(
+                    controller: password,
                     decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 15),
                         hintText: "Password",
@@ -111,7 +113,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     case LoginInitial:
                       {
                         return ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              loginBloc.add(LoginAUserEvent(
+                                  context: context,
+                                  email: email.text,
+                                  password: password.text));
+                            },
                             child: Icon(Icons.arrow_forward_ios));
                       }
 

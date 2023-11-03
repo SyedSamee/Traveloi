@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:traveloi/src/view/bottom_viewer/bottom_viewer.dart';
 
 part 'splash_event.dart';
 part 'splash_state.dart';
@@ -16,13 +18,17 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   FutureOr<void> splashInitialEvent(
       SplashInitialEvent event, Emitter<SplashState> emit) async {
     //checking if user is login or not.
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-    //if user is login send him/her to home
-    // this will mimic the checking function
-    await Future.delayed(Duration(seconds: 2));
-    //else show him/her login screen
-
-    Navigator.pushNamedAndRemoveUntil(
-        event.context, "/login", (route) => false);
+    if (sharedPreferences.getString("userId") != null) {
+      Navigator.pushAndRemoveUntil(
+          event.context,
+          MaterialPageRoute(builder: (context) => BottomViewer()),
+          (route) => false);
+      //user is logged in
+    } else {
+      Navigator.pushNamedAndRemoveUntil(
+          event.context, "/login", (route) => false);
+    }
   }
 }
