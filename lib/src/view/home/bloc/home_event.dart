@@ -16,3 +16,13 @@ class HomeSearchPlacesEvent extends HomeEvent {
       required this.products,
       required this.profileImg});
 }
+
+class HomeAddOrRemoveFavEvent extends HomeEvent {
+  final String productId;
+  final HomeBloc homeBloc;
+
+  HomeAddOrRemoveFavEvent({
+    required this.productId,
+    required this.homeBloc,
+  });
+}
