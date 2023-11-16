@@ -131,7 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 listener: (context, state) {
                   state as RegisterMsgState;
 
-                  Messenger(context, state.msg, state.isError);
+                  messenger(context, state.msg, state.isError);
                 },
                 builder: (context, state) {
                   switch (state.runtimeType) {

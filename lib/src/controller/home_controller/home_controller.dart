@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traveloi/src/config/extention/string_extentions.dart';
+import 'package:traveloi/src/config/global/global.dart';
 
 class HomeController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -9,7 +10,6 @@ class HomeController {
     List<Map<String, dynamic>> products = [];
 
     List favProductId = [];
-    List<Map<String, dynamic>> allProducts = [];
 
     try {
       var productsResponse =
@@ -110,7 +110,7 @@ class HomeController {
                 .collection("favourite")
                 .add({"placeId": id});
             if (response.id.isNotEmpty) {
-              return true;
+              return 1;
             } else {
               return "Something went wrong try again";
             }
@@ -124,7 +124,7 @@ class HomeController {
                     .collection("favourite")
                     .doc(favResponse.docs[w].id)
                     .delete();
-                return true;
+                return 0;
               }
             }
           }
@@ -137,7 +137,7 @@ class HomeController {
             .collection("favourite")
             .add({"placeId": id});
         if (response.id.isNotEmpty) {
-          return true;
+          return 1;
         } else {
           return "Something went wrong try again";
         }
@@ -149,5 +149,14 @@ class HomeController {
         return e;
       }
     }
+  }
+
+  favProductListBuilder(Map<String, dynamic> favData) {
+    for (var e = 0; e < favProducts.length; e++) {
+      if (favProducts[e]["productId"] == favData["productId"]) {
+        favProducts.removeAt(e);
+      }
+    }
+    return favProducts.add(favData);
   }
 }

@@ -19,7 +19,7 @@ ThemeData appTheme = ThemeData(
 
 CircularProgressIndicator loadingIndicator = CircularProgressIndicator();
 
-Messenger(BuildContext context, String msg, bool isError) {
+messenger(BuildContext context, String msg, bool isError) {
   return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Text(
       msg,
@@ -37,7 +37,12 @@ defaultIndicator(String? msg) {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CircularProgressIndicator(),
-        msg != null ? Text(msg) : SizedBox()
+        msg != null
+            ? Text(
+                msg,
+                style: TextStyle(fontWeight: FontWeight.w500),
+              )
+            : SizedBox()
       ],
     ),
   );

@@ -15,9 +15,9 @@ final class HomeInitState extends HomeState {
   });
 }
 
-final class HomeGetAllProducts extends HomeState {
+final class HomeGetAllProductsState extends HomeState {
   final List<Map<String, dynamic>> products;
-  HomeGetAllProducts({required this.products});
+  HomeGetAllProductsState({required this.products});
 }
 
 final class HomeLoadingState extends HomeState {
@@ -25,7 +25,10 @@ final class HomeLoadingState extends HomeState {
   HomeLoadingState({required this.msg});
 }
 
-final class HomeSearchPlaceLoadingState extends HomeState {}
+final class HomeProductLoadingState extends HomeState {
+  final String? msg;
+  HomeProductLoadingState({this.msg = "Fetching products please wait"});
+}
 
 final class HomeMsgState extends HomeState {
   final String msg;
@@ -34,8 +37,18 @@ final class HomeMsgState extends HomeState {
 }
 
 final class HomeSearchPlaceState extends HomeState {
-  final List<Map<String, dynamic>> products;
+  final List<Map<String, dynamic>>? products;
   HomeSearchPlaceState({required this.products});
 }
 
-final class HomeFavLoadingState extends HomeState {}
+final class HomeFavLoadingState extends HomeState {
+  final int loadingIndex;
+  HomeFavLoadingState({required this.loadingIndex});
+}
+
+final class HomeFavStatusState extends HomeState {
+  final List<Map<String, dynamic>> favList;
+  final List products;
+
+  HomeFavStatusState({required this.favList, required this.products});
+}

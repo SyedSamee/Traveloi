@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 listenWhen: (previous, current) => current is LoginMsgState,
                 listener: (context, state) {
                   state as LoginMsgState;
-                  Messenger(context, state.msg, state.isError);
+                  messenger(context, state.msg, state.isError);
                 },
                 builder: (context, state) {
                   switch (state.runtimeType) {
