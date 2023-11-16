@@ -229,189 +229,167 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                     BorderRadius
                                                                         .circular(
                                                                             30)),
-                                                        child: Column(
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .only(
-                                                                        right:
-                                                                            16,
-                                                                        top:
-                                                                            10),
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    GestureDetector(
-                                                                      onTap:
-                                                                          () {
-                                                                        state is HomeGetAllProductsState
-                                                                            ? widget.homeBloc.add(HomeAddOrRemoveFavEvent(
-                                                                                productId: state.products[index]["product_id"],
-                                                                                homeBloc: widget.homeBloc,
-                                                                                loadingIndex: index,
-                                                                                context: context,
-                                                                                productIdList: state.products))
-                                                                            : null;
-                                                                      },
-                                                                      child: BlocBuilder<
-                                                                          HomeBloc,
-                                                                          HomeState>(
-                                                                        bloc: widget
-                                                                            .homeBloc,
-                                                                        buildWhen: (previous,
-                                                                                current) =>
-                                                                            current
-                                                                                is HomeFavStatusState,
-                                                                        builder:
-                                                                            (context,
-                                                                                state) {
-                                                                          return CircleAvatar(
-                                                                            backgroundColor: Color.fromRGBO(
-                                                                                29,
-                                                                                29,
-                                                                                29,
-                                                                                0.40),
-                                                                            child:
-                                                                                SvgPicture.asset(
-                                                                              "assets/images/icons/heart_icon.svg",
-                                                                              width: width * .055,
-                                                                              color: state is HomeFavStatusState
-                                                                                  ? state.favList[index]["isFav"].contains("1") && state.favList[index]["productId"].contains(state.products[index]["product_id"])
-                                                                                      ? Colors.red
-                                                                                      : null
-                                                                                  : null,
-                                                                            ),
-                                                                          );
-                                                                        },
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Spacer(),
-                                                              Container(
-                                                                width:
-                                                                    width * .47,
-                                                                height: height *
-                                                                    .095,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              15),
-                                                                  color: Color
-                                                                      .fromRGBO(
+                                                        child:
+                                                            Column(children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    right: 16,
+                                                                    top: 10),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .end,
+                                                              children: [
+                                                                GestureDetector(
+                                                                    onTap: () {
+                                                                      state is HomeGetAllProductsState
+                                                                          ? widget.homeBloc.add(HomeAddOrRemoveFavEvent(
+                                                                              productId: state.products[index]["product_id"],
+                                                                              homeBloc: widget.homeBloc,
+                                                                              loadingIndex: index,
+                                                                              context: context,
+                                                                              productList: state.products))
+                                                                          : null;
+                                                                    },
+                                                                    child:
+                                                                        CircleAvatar(
+                                                                      backgroundColor: Color.fromRGBO(
                                                                           29,
                                                                           29,
                                                                           29,
                                                                           0.40),
-                                                                ),
-                                                                child: Column(
-                                                                    children: [
-                                                                      Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
-                                                                            top:
-                                                                                12,
-                                                                            left:
-                                                                                12),
-                                                                        child:
-                                                                            Row(
-                                                                          children: [
-                                                                            Text.rich(
+                                                                      child: SvgPicture.asset(
+                                                                          "assets/images/icons/heart_icon.svg",
+                                                                          width:
+                                                                              width * .055,
+                                                                          color: state is HomeGetAllProductsState
+                                                                              ? state.products[index]["isFavByUser"] == 1
+                                                                                  ? Colors.redAccent
+                                                                                  : null
+                                                                              : null),
+                                                                    ))
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Spacer(),
+                                                          Container(
+                                                            width: width * .47,
+                                                            height:
+                                                                height * .095,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          15),
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      29,
+                                                                      29,
+                                                                      29,
+                                                                      0.40),
+                                                            ),
+                                                            child: Column(
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .only(
+                                                                        top: 12,
+                                                                        left:
+                                                                            12),
+                                                                    child: Row(
+                                                                      children: [
+                                                                        Text.rich(
+                                                                          TextSpan(
+                                                                            children: [
                                                                               TextSpan(
-                                                                                children: [
-                                                                                  TextSpan(
-                                                                                    text: '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["name"] : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["name"] : ""} ',
-                                                                                    style: TextStyle(
-                                                                                      color: Colors.white,
-                                                                                      fontSize: 16,
-                                                                                      fontFamily: 'Roboto',
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                      height: 0,
-                                                                                    ),
-                                                                                  ),
-                                                                                  TextSpan(
-                                                                                    text: '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["location"].toString().separateFirstLocation() : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["location"].toString().separateFirstLocation() : ""}',
-                                                                                    style: TextStyle(
-                                                                                      color: Color(0xFFC9C8C8),
-                                                                                      fontSize: 14,
-                                                                                      fontFamily: 'Roboto',
-                                                                                      fontWeight: FontWeight.w500,
-                                                                                      height: 0,
-                                                                                    ),
-                                                                                  ),
-                                                                                ],
+                                                                                text: '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["name"] : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["name"] : ""} ',
+                                                                                style: TextStyle(
+                                                                                  color: Colors.white,
+                                                                                  fontSize: 16,
+                                                                                  fontFamily: 'Roboto',
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  height: 0,
+                                                                                ),
                                                                               ),
-                                                                            )
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: const EdgeInsets
-                                                                            .only(
-                                                                            top:
-                                                                                12,
-                                                                            left:
-                                                                                12),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.spaceBetween,
+                                                                              TextSpan(
+                                                                                text: '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["location"].toString().separateFirstLocation() : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["location"].toString().separateFirstLocation() : ""}',
+                                                                                style: TextStyle(
+                                                                                  color: Color(0xFFC9C8C8),
+                                                                                  fontSize: 14,
+                                                                                  fontFamily: 'Roboto',
+                                                                                  fontWeight: FontWeight.w500,
+                                                                                  height: 0,
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .only(
+                                                                        top: 12,
+                                                                        left:
+                                                                            12),
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceBetween,
+                                                                      children: [
+                                                                        Row(
                                                                           children: [
-                                                                            Row(
-                                                                              children: [
-                                                                                SvgPicture.asset("assets/images/icons/map_icon.svg"),
-                                                                                SizedBox(
-                                                                                  width: width * .015,
-                                                                                ),
-                                                                                Text(
-                                                                                  '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["location"].toString().listMarksRemover : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["location"].toString().listMarksRemover : ""}',
-                                                                                  style: TextStyle(
-                                                                                    color: Color(0xFFC9C8C8),
-                                                                                    fontSize: 14,
-                                                                                    fontFamily: 'Roboto',
-                                                                                    fontWeight: FontWeight.w400,
-                                                                                    height: 0,
-                                                                                  ),
-                                                                                ),
-                                                                              ],
+                                                                            SvgPicture.asset("assets/images/icons/map_icon.svg"),
+                                                                            SizedBox(
+                                                                              width: width * .015,
                                                                             ),
-                                                                            Row(
-                                                                              children: [
-                                                                                SvgPicture.asset("assets/images/icons/star_icon.svg"),
-                                                                                SizedBox(
-                                                                                  width: width * .015,
-                                                                                ),
-                                                                                Text(
-                                                                                  '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["rating"] : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["rating"] : ""}',
-                                                                                  style: TextStyle(
-                                                                                    color: Color(0xFFC9C8C8),
-                                                                                    fontSize: 14,
-                                                                                    fontFamily: 'Roboto',
-                                                                                    fontWeight: FontWeight.w400,
-                                                                                    height: 0,
-                                                                                  ),
-                                                                                ),
-                                                                                SizedBox(
-                                                                                  width: width * .015,
-                                                                                ),
-                                                                              ],
-                                                                            )
+                                                                            Text(
+                                                                              '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["location"].toString().listMarksRemover : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["location"].toString().listMarksRemover : ""}',
+                                                                              style: TextStyle(
+                                                                                color: Color(0xFFC9C8C8),
+                                                                                fontSize: 14,
+                                                                                fontFamily: 'Roboto',
+                                                                                fontWeight: FontWeight.w400,
+                                                                                height: 0,
+                                                                              ),
+                                                                            ),
                                                                           ],
                                                                         ),
-                                                                      )
-                                                                    ]),
-                                                              ),
-                                                              SizedBox(
-                                                                height: height *
-                                                                    .03,
-                                                              ),
-                                                            ]),
+                                                                        Row(
+                                                                          children: [
+                                                                            SvgPicture.asset("assets/images/icons/star_icon.svg"),
+                                                                            SizedBox(
+                                                                              width: width * .015,
+                                                                            ),
+                                                                            Text(
+                                                                              '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["rating"] : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["rating"] : ""}',
+                                                                              style: TextStyle(
+                                                                                color: Color(0xFFC9C8C8),
+                                                                                fontSize: 14,
+                                                                                fontFamily: 'Roboto',
+                                                                                fontWeight: FontWeight.w400,
+                                                                                height: 0,
+                                                                              ),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: width * .015,
+                                                                            ),
+                                                                          ],
+                                                                        )
+                                                                      ],
+                                                                    ),
+                                                                  )
+                                                                ]),
+                                                          ),
+                                                          SizedBox(
+                                                            height:
+                                                                height * .03,
+                                                          ),
+                                                        ]),
                                                       ),
                                                     ],
                                                   ),

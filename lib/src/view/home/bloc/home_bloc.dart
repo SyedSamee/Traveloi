@@ -85,23 +85,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> homeAddOrRemoveFavEvent(
       HomeAddOrRemoveFavEvent event, Emitter<HomeState> emit) async {
     emit(HomeFavLoadingState(loadingIndex: event.loadingIndex));
-    var userChecker = await checkIfUserExist(event.context);
+
     var favResponse = await HomeController().addOrRemoveToFav(event.productId);
 
-    if (userChecker == true) {
-      if (favResponse is int) {
-        await HomeController().favProductListBuilder(
-            {"isFav": favResponse.toString(), "productId": event.productId});
-        //check the product id list its doing some sort of issue
-        print(favProducts);
-        print(event.productIdList);
-        emit(HomeFavStatusState(
-            favList: favProducts, products: event.productIdList));
-      } else if (favResponse is String) {
-        emit(HomeMsgState(msg: favResponse, isError: true));
-      } else {
-        emit(HomeMsgState(msg: "Something went wrong", isError: true));
+    if (favResponse is int) {
+      for (var i = 0; i < event.productList.length; i++) {
+        if (event.productList[i]["product_id"] == event.productId) {
+          Map<String, dynamic> replacement = event.productList[i];
+
+          replacement.update("isFavByUser", (value) => favResponse);
+
+          event.productList[i] = replacement;
+        }
       }
+
+      emit(HomeGetAllProductsState(products: event.productList));
+      // emit(HomeFavStatusState(
+      //     favList: favProducts, products: event.productList));
+    } else if (favResponse is String) {
+      emit(HomeMsgState(msg: favResponse, isError: true));
+    } else {
+      emit(HomeMsgState(msg: "Something went wrong", isError: true));
     }
   }
 }

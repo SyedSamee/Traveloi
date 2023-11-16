@@ -32,18 +32,13 @@ class HomeController {
         //add all the product to list
         for (var i = 0; i < productsResponse.size; i++) {
           //checking if product id is present in user fav list if it does then we will add an variable called isFavByUser otherwise will just add the product details
-          if (favProductId.contains(productsResponse.docs[i].id)) {
-            products.add({
-              "product_id": productsResponse.docs[i].id,
-              "product_detail": productsResponse.docs[i].data(),
-              "isFavByUser": true
-            });
-          } else {
-            products.add({
-              "product_id": productsResponse.docs[i].id,
-              "product_detail": productsResponse.docs[i].data(),
-            });
-          }
+          products.add({
+            "product_id": productsResponse.docs[i].id,
+            "product_detail": productsResponse.docs[i].data(),
+            "isFavByUser": favProductId.contains(productsResponse.docs[i].id)
+                ? true
+                : false
+          });
         }
 
         return products;
@@ -94,6 +89,7 @@ class HomeController {
 
   Future addOrRemoveToFav(String id) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    List allFavs = [];
     try {
       var favResponse = await firebaseFirestore
           .collection("users")
@@ -103,34 +99,37 @@ class HomeController {
       if (favResponse.docs.isNotEmpty) {
         for (var e = 0; e < favResponse.size; e++) {
           //checking if product id is'nt present in user's fav if it does'nt add it else delete
-          if (id != favResponse.docs[e].data()["placeId"]) {
-            var response = await firebaseFirestore
-                .collection("users")
-                .doc(sharedPreferences.getString("userId"))
-                .collection("favourite")
-                .add({"placeId": id});
-            if (response.id.isNotEmpty) {
-              return 1;
-            } else {
-              return "Something went wrong try again";
+
+          allFavs.add(favResponse.docs[e].data()["placeId"]);
+        }
+        if (allFavs.contains(id)) {
+          //  deleting product id from user's fav
+          for (var w = 0; w < favResponse.size; w++) {
+            if (id == favResponse.docs[w].data()["placeId"]) {
+              await firebaseFirestore
+                  .collection("users")
+                  .doc(sharedPreferences.getString("userId"))
+                  .collection("favourite")
+                  .doc(favResponse.docs[w].id)
+                  .delete();
+              return 0;
             }
+          }
+        } else {
+          var response = await firebaseFirestore
+              .collection("users")
+              .doc(sharedPreferences.getString("userId"))
+              .collection("favourite")
+              .add({"placeId": id});
+          if (response.id.isNotEmpty) {
+            return 1;
           } else {
-            // deleting product id from user's fav
-            for (var w = 0; w < favResponse.size; w++) {
-              if (id == favResponse.docs[w].data()["placeId"]) {
-                await firebaseFirestore
-                    .collection("users")
-                    .doc(sharedPreferences.getString("userId"))
-                    .collection("favourite")
-                    .doc(favResponse.docs[w].id)
-                    .delete();
-                return 0;
-              }
-            }
+            return "Something went wrong try again";
           }
         }
       } else {
         //if user fav is empty then this will run as the loop will not run if the user fav collection is empty
+
         var response = await firebaseFirestore
             .collection("users")
             .doc(sharedPreferences.getString("userId"))
@@ -149,14 +148,5 @@ class HomeController {
         return e;
       }
     }
-  }
-
-  favProductListBuilder(Map<String, dynamic> favData) {
-    for (var e = 0; e < favProducts.length; e++) {
-      if (favProducts[e]["productId"] == favData["productId"]) {
-        favProducts.removeAt(e);
-      }
-    }
-    return favProducts.add(favData);
   }
 }
