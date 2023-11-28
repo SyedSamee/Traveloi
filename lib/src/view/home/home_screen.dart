@@ -5,6 +5,7 @@ import 'package:traveloi/src/config/extention/string_extentions.dart';
 import 'package:traveloi/src/config/utils.dart';
 import 'package:traveloi/src/controller/home_controller/home_controller.dart';
 import 'package:traveloi/src/view/home/bloc/home_bloc.dart';
+import 'package:traveloi/src/view/home/widget/productListWidget.dart';
 import 'package:traveloi/src/view/home/widget/profile_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchPlace = TextEditingController();
-  HomeGetAllProductsState? homeGetAllProductsState;
+
   @override
   void initState() {
     widget.homeBloc
@@ -56,9 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     case HomeGetAllProductsState || HomeSearchPlaceState:
                       {
-                        state is HomeGetAllProductsState
-                            ? homeGetAllProductsState = state
-                            : null;
                         return Column(
                           children: [
                             Padding(
@@ -164,241 +162,257 @@ class _HomeScreenState extends State<HomeScreen> {
                             //     child: Text("No product found"))
                             // : SizedBox()
 
-                            Container(
-                                width: width,
-                                height: height * .43,
-                                child: state is HomeSearchPlaceState ||
-                                        state is HomeGetAllProductsState
-                                    ? ListView.builder(
-                                        itemCount: state is HomeSearchPlaceState
-                                            ? state.products!.length
-                                            : state is HomeGetAllProductsState
-                                                ? state.products.length
-                                                : 0,
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) {
-                                          return Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 30),
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  width: width * .58,
-                                                  height: height * .5,
-                                                  child: Stack(
-                                                    children: [
-                                                      Positioned(
-                                                        top: height * .34,
-                                                        left: width * .045,
-                                                        child: Container(
-                                                          width: width * .5,
-                                                          height: height * .07,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                                  color: Colors
-                                                                      .transparent,
-                                                                  boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Colors
-                                                                      .black
-                                                                      .withOpacity(
-                                                                          0.45),
-                                                                  offset:
-                                                                      Offset(
-                                                                          0, 6),
-                                                                  blurRadius:
-                                                                      20,
-                                                                )
-                                                              ]),
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        width: width * .58,
-                                                        height: height * .4,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                image:
-                                                                    DecorationImage(
-                                                                        image:
-                                                                            AssetImage(
-                                                                          "assets/images/product_image.png",
-                                                                        ),
-                                                                        fit: BoxFit
-                                                                            .cover),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30)),
-                                                        child:
-                                                            Column(children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                                    right: 16,
-                                                                    top: 10),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .end,
-                                                              children: [
-                                                                GestureDetector(
-                                                                    onTap: () {
-                                                                      state is HomeGetAllProductsState
-                                                                          ? widget.homeBloc.add(HomeAddOrRemoveFavEvent(
-                                                                              productId: state.products[index]["product_id"],
-                                                                              homeBloc: widget.homeBloc,
-                                                                              loadingIndex: index,
-                                                                              context: context,
-                                                                              productList: state.products))
-                                                                          : null;
-                                                                    },
-                                                                    child:
-                                                                        CircleAvatar(
-                                                                      backgroundColor: Color.fromRGBO(
-                                                                          29,
-                                                                          29,
-                                                                          29,
-                                                                          0.40),
-                                                                      child: SvgPicture.asset(
-                                                                          "assets/images/icons/heart_icon.svg",
-                                                                          width:
-                                                                              width * .055,
-                                                                          color: state is HomeGetAllProductsState
-                                                                              ? state.products[index]["isFavByUser"] == 1
-                                                                                  ? Colors.redAccent
-                                                                                  : null
-                                                                              : null),
-                                                                    ))
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Spacer(),
-                                                          Container(
-                                                            width: width * .47,
-                                                            height:
-                                                                height * .095,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          15),
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      29,
-                                                                      29,
-                                                                      29,
-                                                                      0.40),
-                                                            ),
-                                                            child: Column(
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: const EdgeInsets
-                                                                        .only(
-                                                                        top: 12,
-                                                                        left:
-                                                                            12),
-                                                                    child: Row(
-                                                                      children: [
-                                                                        Text.rich(
-                                                                          TextSpan(
-                                                                            children: [
-                                                                              TextSpan(
-                                                                                text: '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["name"] : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["name"] : ""} ',
-                                                                                style: TextStyle(
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 16,
-                                                                                  fontFamily: 'Roboto',
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  height: 0,
-                                                                                ),
-                                                                              ),
-                                                                              TextSpan(
-                                                                                text: '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["location"].toString().separateFirstLocation() : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["location"].toString().separateFirstLocation() : ""}',
-                                                                                style: TextStyle(
-                                                                                  color: Color(0xFFC9C8C8),
-                                                                                  fontSize: 14,
-                                                                                  fontFamily: 'Roboto',
-                                                                                  fontWeight: FontWeight.w500,
-                                                                                  height: 0,
-                                                                                ),
-                                                                              ),
-                                                                            ],
-                                                                          ),
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: const EdgeInsets
-                                                                        .only(
-                                                                        top: 12,
-                                                                        left:
-                                                                            12),
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceBetween,
-                                                                      children: [
-                                                                        Row(
-                                                                          children: [
-                                                                            SvgPicture.asset("assets/images/icons/map_icon.svg"),
-                                                                            SizedBox(
-                                                                              width: width * .015,
-                                                                            ),
-                                                                            Text(
-                                                                              '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["location"].toString().listMarksRemover : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["location"].toString().listMarksRemover : ""}',
-                                                                              style: TextStyle(
-                                                                                color: Color(0xFFC9C8C8),
-                                                                                fontSize: 14,
-                                                                                fontFamily: 'Roboto',
-                                                                                fontWeight: FontWeight.w400,
-                                                                                height: 0,
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                        Row(
-                                                                          children: [
-                                                                            SvgPicture.asset("assets/images/icons/star_icon.svg"),
-                                                                            SizedBox(
-                                                                              width: width * .015,
-                                                                            ),
-                                                                            Text(
-                                                                              '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["rating"] : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["rating"] : ""}',
-                                                                              style: TextStyle(
-                                                                                color: Color(0xFFC9C8C8),
-                                                                                fontSize: 14,
-                                                                                fontFamily: 'Roboto',
-                                                                                fontWeight: FontWeight.w400,
-                                                                                height: 0,
-                                                                              ),
-                                                                            ),
-                                                                            SizedBox(
-                                                                              width: width * .015,
-                                                                            ),
-                                                                          ],
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  )
-                                                                ]),
-                                                          ),
-                                                          SizedBox(
-                                                            height:
-                                                                height * .03,
-                                                          ),
-                                                        ]),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        })
-                                    : null)
+                            ProductList(
+                                productsState: state is HomeGetAllProductsState
+                                    ? state
+                                    : null,
+                                searchState: state is HomeSearchPlaceState
+                                    ? state
+                                    : null,
+                                homeBloc: widget.homeBloc)
+
+                            // Container(
+                            //     width: width,
+                            //     height: height * .43,
+                            //     child: state is HomeSearchPlaceState ||
+                            //             state is HomeGetAllProductsState
+                            //         ? ListView.builder(
+                            //             itemCount: state is HomeSearchPlaceState
+                            //                 ? state.products?.length
+                            //                 : state is HomeGetAllProductsState
+                            //                     ? state.products.length
+                            //                     : 0,
+                            //             scrollDirection: Axis.horizontal,
+                            //             itemBuilder: (context, index) {
+                            //               return Padding(
+                            //                 padding: const EdgeInsets.symmetric(
+                            //                     horizontal: 30),
+                            //                 child: Row(
+                            //                   children: [
+                            //                     Container(
+                            //                       width: width * .58,
+                            //                       height: height * .5,
+                            //                       child: Stack(
+                            //                         children: [
+                            //                           Positioned(
+                            //                             top: height * .34,
+                            //                             left: width * .045,
+                            //                             child: Container(
+                            //                               width: width * .5,
+                            //                               height: height * .07,
+                            //                               decoration:
+                            //                                   BoxDecoration(
+                            //                                       color: Colors
+                            //                                           .transparent,
+                            //                                       boxShadow: [
+                            //                                     BoxShadow(
+                            //                                       color: Colors
+                            //                                           .black
+                            //                                           .withOpacity(
+                            //                                               0.45),
+                            //                                       offset:
+                            //                                           Offset(
+                            //                                               0, 6),
+                            //                                       blurRadius:
+                            //                                           20,
+                            //                                     )
+                            //                                   ]),
+                            //                             ),
+                            //                           ),
+                            //                           Container(
+                            //                             width: width * .58,
+                            //                             height: height * .4,
+                            //                             decoration:
+                            //                                 BoxDecoration(
+                            //                                     image:
+                            //                                         DecorationImage(
+                            //                                             image:
+                            //                                                 AssetImage(
+                            //                                               "assets/images/product_image.png",
+                            //                                             ),
+                            //                                             fit: BoxFit
+                            //                                                 .cover),
+                            //                                     borderRadius:
+                            //                                         BorderRadius
+                            //                                             .circular(
+                            //                                                 30)),
+                            //                             child:
+                            //                                 Column(children: [
+                            //                               Padding(
+                            //                                 padding:
+                            //                                     const EdgeInsets
+                            //                                         .only(
+                            //                                         right: 16,
+                            //                                         top: 10),
+                            //                                 child: Row(
+                            //                                   mainAxisAlignment:
+                            //                                       MainAxisAlignment
+                            //                                           .end,
+                            //                                   children: [
+                            //                                     GestureDetector(
+                            //                                         onTap: () {
+                            //                                           state
+                            //                                                   is HomeGetAllProductsState
+                            //                                               ? widget.homeBloc.add(HomeAddOrRemoveFavEvent(
+                            //                                                   productId: state.products[index]["product_id"],
+                            //                                                   homeBloc: widget.homeBloc,
+                            //                                                   loadingIndex: index,
+                            //                                                   context: context,
+                            //                                                   productList: state.products))
+                            //                                               : state is HomeSearchPlaceState
+                            //                                                   ? widget.homeBloc.add(HomeAddOrRemoveFavEvent(productId: state.products![index]["product_id"], homeBloc: widget.homeBloc, loadingIndex: index, context: context, productList: state.products!))
+                            //                                                   : null;
+                            //                                         },
+                            //                                         child:
+                            //                                             CircleAvatar(
+                            //                                           backgroundColor: Color.fromRGBO(
+                            //                                               29,
+                            //                                               29,
+                            //                                               29,
+                            //                                               0.40),
+                            //                                           child: SvgPicture.asset(
+                            //                                               "assets/images/icons/heart_icon.svg",
+                            //                                               width:
+                            //                                                   width * .055,
+                            //                                               color: state is HomeGetAllProductsState
+                            //                                                   ? state.products[index]["isFavByUser"] == 1
+                            //                                                       ? Colors.redAccent
+                            //                                                       : null
+                            //                                                   : state is HomeSearchPlaceState
+                            //                                                       ? state.products![index]["isFavByUser"] == 1
+                            //                                                           ? Colors.redAccent
+                            //                                                           : null
+                            //                                                       : null),
+                            //                                         ))
+                            //                                   ],
+                            //                                 ),
+                            //                               ),
+                            //                               Spacer(),
+                            //                               Container(
+                            //                                 width: width * .47,
+                            //                                 height:
+                            //                                     height * .095,
+                            //                                 decoration:
+                            //                                     BoxDecoration(
+                            //                                   borderRadius:
+                            //                                       BorderRadius
+                            //                                           .circular(
+                            //                                               15),
+                            //                                   color: Color
+                            //                                       .fromRGBO(
+                            //                                           29,
+                            //                                           29,
+                            //                                           29,
+                            //                                           0.40),
+                            //                                 ),
+                            //                                 child: Column(
+                            //                                     children: [
+                            //                                       Padding(
+                            //                                         padding: const EdgeInsets
+                            //                                             .only(
+                            //                                             top: 12,
+                            //                                             left:
+                            //                                                 12),
+                            //                                         child: Row(
+                            //                                           children: [
+                            //                                             Text.rich(
+                            //                                               TextSpan(
+                            //                                                 children: [
+                            //                                                   TextSpan(
+                            //                                                     text: '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["name"] : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["name"] : ""} ',
+                            //                                                     style: TextStyle(
+                            //                                                       color: Colors.white,
+                            //                                                       fontSize: 16,
+                            //                                                       fontFamily: 'Roboto',
+                            //                                                       fontWeight: FontWeight.w500,
+                            //                                                       height: 0,
+                            //                                                     ),
+                            //                                                   ),
+                            //                                                   TextSpan(
+                            //                                                     text: '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["location"].toString().separateFirstLocation() : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["location"].toString().separateFirstLocation() : ""}',
+                            //                                                     style: TextStyle(
+                            //                                                       color: Color(0xFFC9C8C8),
+                            //                                                       fontSize: 14,
+                            //                                                       fontFamily: 'Roboto',
+                            //                                                       fontWeight: FontWeight.w500,
+                            //                                                       height: 0,
+                            //                                                     ),
+                            //                                                   ),
+                            //                                                 ],
+                            //                                               ),
+                            //                                             )
+                            //                                           ],
+                            //                                         ),
+                            //                                       ),
+                            //                                       Padding(
+                            //                                         padding: const EdgeInsets
+                            //                                             .only(
+                            //                                             top: 12,
+                            //                                             left:
+                            //                                                 12),
+                            //                                         child: Row(
+                            //                                           mainAxisAlignment:
+                            //                                               MainAxisAlignment
+                            //                                                   .spaceBetween,
+                            //                                           children: [
+                            //                                             Row(
+                            //                                               children: [
+                            //                                                 SvgPicture.asset("assets/images/icons/map_icon.svg"),
+                            //                                                 SizedBox(
+                            //                                                   width: width * .015,
+                            //                                                 ),
+                            //                                                 Text(
+                            //                                                   '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["location"].toString().listMarksRemover : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["location"].toString().listMarksRemover : ""}',
+                            //                                                   style: TextStyle(
+                            //                                                     color: Color(0xFFC9C8C8),
+                            //                                                     fontSize: 14,
+                            //                                                     fontFamily: 'Roboto',
+                            //                                                     fontWeight: FontWeight.w400,
+                            //                                                     height: 0,
+                            //                                                   ),
+                            //                                                 ),
+                            //                                               ],
+                            //                                             ),
+                            //                                             Row(
+                            //                                               children: [
+                            //                                                 SvgPicture.asset("assets/images/icons/star_icon.svg"),
+                            //                                                 SizedBox(
+                            //                                                   width: width * .015,
+                            //                                                 ),
+                            //                                                 Text(
+                            //                                                   '${state is HomeSearchPlaceState ? state.products![index]["product_detail"]["rating"] : state is HomeGetAllProductsState ? state.products[index]["product_detail"]["rating"] : ""}',
+                            //                                                   style: TextStyle(
+                            //                                                     color: Color(0xFFC9C8C8),
+                            //                                                     fontSize: 14,
+                            //                                                     fontFamily: 'Roboto',
+                            //                                                     fontWeight: FontWeight.w400,
+                            //                                                     height: 0,
+                            //                                                   ),
+                            //                                                 ),
+                            //                                                 SizedBox(
+                            //                                                   width: width * .015,
+                            //                                                 ),
+                            //                                               ],
+                            //                                             )
+                            //                                           ],
+                            //                                         ),
+                            //                                       )
+                            //                                     ]),
+                            //                               ),
+                            //                               SizedBox(
+                            //                                 height:
+                            //                                     height * .03,
+                            //                               ),
+                            //                             ]),
+                            //                           ),
+                            //                         ],
+                            //                       ),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               );
+                            //             })
+                            //         : null)
                           ],
                         );
                       }

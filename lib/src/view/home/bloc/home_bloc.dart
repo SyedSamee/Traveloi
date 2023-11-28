@@ -64,6 +64,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(HomeProductLoadingState());
       var userChecker = await checkIfUserExist(event.context);
       var searchResponse = await HomeController().searchPlace(event.query);
+
       if (userChecker == true) {
         if (searchResponse is List<Map<String, dynamic>> &&
             searchResponse.isNotEmpty) {
@@ -84,7 +85,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> homeAddOrRemoveFavEvent(
       HomeAddOrRemoveFavEvent event, Emitter<HomeState> emit) async {
-    emit(HomeFavLoadingState(loadingIndex: event.loadingIndex));
+    emit(HomeFavLoadingState());
 
     var favResponse = await HomeController().addOrRemoveToFav(event.productId);
 
@@ -96,12 +97,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           replacement.update("isFavByUser", (value) => favResponse);
 
           event.productList[i] = replacement;
+
+          event.isSearchState
+              ? emit(HomeSearchPlaceState(products: event.productList))
+              : emit(HomeGetAllProductsState(products: event.productList));
         }
       }
-
-      emit(HomeGetAllProductsState(products: event.productList));
-      // emit(HomeFavStatusState(
-      //     favList: favProducts, products: event.productList));
     } else if (favResponse is String) {
       emit(HomeMsgState(msg: favResponse, isError: true));
     } else {

@@ -35,3 +35,22 @@ Future checkIfUserExist(BuildContext context) async {
     return true;
   }
 }
+
+Future getAProductDetail(String productId) async {
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  try {
+    var productResponse =
+        await firebaseFirestore.collection("products").doc(productId).get();
+    if (productResponse.exists) {
+      return productResponse.data() as Map<String, dynamic>;
+    } else {
+      return "Id is'nt valid";
+    }
+  } catch (e) {
+    if (e is FirebaseException) {
+      return e.message;
+    } else {
+      return e;
+    }
+  }
+}

@@ -9,7 +9,7 @@ class HomeController {
   Future getAllItems() async {
     List<Map<String, dynamic>> products = [];
 
-    List favProductId = [];
+    List favProductIds = [];
 
     try {
       var productsResponse =
@@ -27,17 +27,17 @@ class HomeController {
             .get();
         //adding user fav restaurant into a list
         for (var e = 0; e < userFavResponse.size; e++) {
-          favProductId.add(userFavResponse.docs[e].data()["placeId"]);
+          favProductIds.add(userFavResponse.docs[e].data()["placeId"]);
         }
         //add all the product to list
+
         for (var i = 0; i < productsResponse.size; i++) {
           //checking if product id is present in user fav list if it does then we will add an variable called isFavByUser otherwise will just add the product details
           products.add({
             "product_id": productsResponse.docs[i].id,
             "product_detail": productsResponse.docs[i].data(),
-            "isFavByUser": favProductId.contains(productsResponse.docs[i].id)
-                ? true
-                : false
+            "isFavByUser":
+                favProductIds.contains(productsResponse.docs[i].id) ? 1 : 0
           });
         }
 
@@ -57,7 +57,8 @@ class HomeController {
   Future searchPlace(String query) async {
     List<Map<String, dynamic>> searchResult = [];
     String filteredQuery = query.firstLetterCapital;
-
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    List favProductIds = [];
     try {
       //searching a product with custom method for more accuracy
       var searchResponse = await firebaseFirestore
@@ -67,10 +68,27 @@ class HomeController {
 
       if (searchResponse.docs.isNotEmpty) {
         //adding response into a list
-        for (var o = 0; o < searchResponse.size; o++) {
+
+        //getting user's fav restaurant
+        var userFavResponse = await firebaseFirestore
+            .collection("users")
+            .doc(sharedPreferences.getString("userId"))
+            .collection("favourite")
+            .get();
+        //adding user fav restaurant into a list
+        for (var e = 0; e < userFavResponse.size; e++) {
+          favProductIds.add(userFavResponse.docs[e].data()["placeId"]);
+        }
+        //add all the product to list
+
+        for (var i = 0; i < searchResponse.size; i++) {
+          //checking if product id is present in user fav list if it does then we will add an variable called isFavByUser otherwise will just add the product details
+
           searchResult.add({
-            "product_id": searchResponse.docs[o].id,
-            "product_detail": searchResponse.docs[o].data()
+            "product_id": searchResponse.docs[i].id,
+            "product_detail": searchResponse.docs[i].data(),
+            "isFavByUser":
+                favProductIds.contains(searchResponse.docs[i].id) ? 1 : 0
           });
         }
 

@@ -41,10 +41,7 @@ final class HomeSearchPlaceState extends HomeState {
   HomeSearchPlaceState({required this.products});
 }
 
-final class HomeFavLoadingState extends HomeState {
-  final int loadingIndex;
-  HomeFavLoadingState({required this.loadingIndex});
-}
+final class HomeFavLoadingState extends HomeState {}
 
 final class HomeFavStatusState extends HomeState {
   final List<Map<String, dynamic>> favList;

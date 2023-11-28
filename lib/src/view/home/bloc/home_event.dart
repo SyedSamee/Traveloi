@@ -32,13 +32,15 @@ class HomeAddOrRemoveFavEvent extends HomeEvent {
   final int loadingIndex;
   final BuildContext context;
   final List<Map<String, dynamic>> productList;
+  final bool isSearchState;
 
   HomeAddOrRemoveFavEvent(
       {required this.productId,
       required this.homeBloc,
       required this.loadingIndex,
       required this.context,
-      required this.productList});
+      required this.productList,
+      required this.isSearchState});
 }
 
 class HomeTestEvent extends HomeEvent {}
