@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:traveloi/src/config/global/global.dart';
 import 'package:traveloi/src/config/utils.dart';
 import 'package:traveloi/src/controller/home_controller/home_controller.dart';
+import 'package:traveloi/src/view/detail_product/detail_product._screen.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -17,6 +18,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeGetAllProductsEvent>(homeGetAllProductsEvent);
     on<HomeSearchPlacesEvent>(homeSearchPlacesEvent);
     on<HomeAddOrRemoveFavEvent>(homeAddOrRemoveFavEvent);
+    on<HomeToProductEvent>(homeToProductEvent);
   }
 
   FutureOr<void> homeInitialEvent(
@@ -108,5 +110,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else {
       emit(HomeMsgState(msg: "Something went wrong", isError: true));
     }
+  }
+
+  FutureOr<void> homeToProductEvent(
+      HomeToProductEvent event, Emitter<HomeState> emit) {
+    Navigator.push(
+        event.context,
+        MaterialPageRoute(
+            builder: (context) =>
+                DetailProductScreen(productId: event.productId)));
   }
 }

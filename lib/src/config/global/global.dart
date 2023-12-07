@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traveloi/src/view/auth/login/login_screen.dart';
 
-//you can find favProducts controller at homecontroller
 Future getUserDetail() async {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

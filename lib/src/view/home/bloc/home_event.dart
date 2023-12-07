@@ -43,4 +43,8 @@ class HomeAddOrRemoveFavEvent extends HomeEvent {
       required this.isSearchState});
 }
 
-class HomeTestEvent extends HomeEvent {}
+class HomeToProductEvent extends HomeEvent {
+  final BuildContext context;
+  final String productId;
+  HomeToProductEvent({required this.context, required this.productId});
+}

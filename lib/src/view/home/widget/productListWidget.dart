@@ -38,205 +38,220 @@ class _ProductListState extends State<ProductList> {
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Row(
                       children: [
-                        Container(
-                          width: width * .58,
-                          height: height * .5,
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                top: height * .34,
-                                left: width * .045,
-                                child: Container(
-                                  width: width * .5,
-                                  height: height * .07,
-                                  decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.45),
-                                          offset: Offset(0, 6),
-                                          blurRadius: 20,
-                                        )
-                                      ]),
-                                ),
-                              ),
-                              Container(
-                                width: width * .58,
-                                height: height * .4,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                          "assets/images/product_image.png",
-                                        ),
-                                        fit: BoxFit.cover),
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: Column(children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 16, top: 10),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        GestureDetector(
-                                            onTap: () {
-                                              widget.productsState != null
-                                                  ? widget.homeBloc.add(HomeAddOrRemoveFavEvent(
-                                                      productId: widget
-                                                              .productsState!
-                                                              .products[index]
-                                                          ["product_id"],
-                                                      homeBloc: widget.homeBloc,
-                                                      loadingIndex: index,
-                                                      context: context,
-                                                      productList: widget
-                                                          .productsState!
-                                                          .products,
-                                                      isSearchState: false))
-                                                  : widget.homeBloc.add(HomeAddOrRemoveFavEvent(
-                                                      productId: widget
-                                                              .searchState!
-                                                              .products![index]
-                                                          ["product_id"],
-                                                      homeBloc: widget.homeBloc,
-                                                      loadingIndex: index,
-                                                      context: context,
-                                                      productList: widget
-                                                          .searchState!
-                                                          .products!,
-                                                      isSearchState: true));
-                                            },
-                                            child: CircleAvatar(
-                                              backgroundColor: Color.fromRGBO(
-                                                  29, 29, 29, 0.40),
-                                              child: SvgPicture.asset(
-                                                  "assets/images/icons/heart_icon.svg",
-                                                  width: width * .055,
-                                                  color: widget.productsState !=
-                                                          null
-                                                      ? widget.productsState!
-                                                                          .products[
-                                                                      index][
-                                                                  "isFavByUser"] ==
-                                                              1
-                                                          ? Colors.redAccent
-                                                          : null
-                                                      : widget.searchState!
-                                                                          .products![
-                                                                      index][
-                                                                  "isFavByUser"] ==
-                                                              1
-                                                          ? Colors.redAccent
-                                                          : null),
-                                            ))
-                                      ],
-                                    ),
-                                  ),
-                                  Spacer(),
-                                  Container(
-                                    width: width * .47,
-                                    height: height * .095,
+                        GestureDetector(
+                          onTap: () {
+                            widget.homeBloc.add(HomeToProductEvent(
+                                context: context,
+                                productId: widget.productsState?.products[index]
+                                    ["product_id"]));
+                          },
+                          child: Container(
+                            width: width * .58,
+                            height: height * .5,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  top: height * .34,
+                                  left: width * .045,
+                                  child: Container(
+                                    width: width * .5,
+                                    height: height * .07,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      color: Color.fromRGBO(29, 29, 29, 0.40),
+                                        color: Colors.transparent,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.black.withOpacity(0.45),
+                                            offset: Offset(0, 6),
+                                            blurRadius: 20,
+                                          )
+                                        ]),
+                                  ),
+                                ),
+                                Container(
+                                  width: width * .58,
+                                  height: height * .4,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                            "assets/images/product_image.png",
+                                          ),
+                                          fit: BoxFit.cover),
+                                      borderRadius: BorderRadius.circular(30)),
+                                  child: Column(children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 16, top: 10),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          GestureDetector(
+                                              onTap: () {
+                                                widget.productsState != null
+                                                    ? widget.homeBloc.add(
+                                                        HomeAddOrRemoveFavEvent(
+                                                            productId: widget
+                                                                    .productsState!
+                                                                    .products[index]
+                                                                ["product_id"],
+                                                            homeBloc:
+                                                                widget.homeBloc,
+                                                            loadingIndex: index,
+                                                            context: context,
+                                                            productList: widget
+                                                                .productsState!
+                                                                .products,
+                                                            isSearchState:
+                                                                false))
+                                                    : widget.homeBloc.add(HomeAddOrRemoveFavEvent(
+                                                        productId: widget
+                                                                .searchState!
+                                                                .products![index]
+                                                            ["product_id"],
+                                                        homeBloc: widget.homeBloc,
+                                                        loadingIndex: index,
+                                                        context: context,
+                                                        productList: widget.searchState!.products!,
+                                                        isSearchState: true));
+                                              },
+                                              child: CircleAvatar(
+                                                backgroundColor: Color.fromRGBO(
+                                                    29, 29, 29, 0.40),
+                                                child: SvgPicture.asset(
+                                                    "assets/images/icons/heart_icon.svg",
+                                                    width: width * .055,
+                                                    color: widget
+                                                                .productsState !=
+                                                            null
+                                                        ? widget.productsState!
+                                                                            .products[
+                                                                        index][
+                                                                    "isFavByUser"] ==
+                                                                1
+                                                            ? Colors.redAccent
+                                                            : null
+                                                        : widget.searchState!
+                                                                            .products![
+                                                                        index][
+                                                                    "isFavByUser"] ==
+                                                                1
+                                                            ? Colors.redAccent
+                                                            : null),
+                                              ))
+                                        ],
+                                      ),
                                     ),
-                                    child: Column(children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 12, left: 12),
-                                        child: Row(
-                                          children: [
-                                            Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text:
-                                                        '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["name"] : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["name"] : ""} ',
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 16,
-                                                      fontFamily: 'Roboto',
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      height: 0,
+                                    Spacer(),
+                                    Container(
+                                      width: width * .47,
+                                      height: height * .095,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: Color.fromRGBO(29, 29, 29, 0.40),
+                                      ),
+                                      child: Column(children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 12, left: 12),
+                                          child: Row(
+                                            children: [
+                                              Text.rich(
+                                                TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text:
+                                                          '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["name"] : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["name"] : ""} ',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 16,
+                                                        fontFamily: 'Roboto',
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        height: 0,
+                                                      ),
                                                     ),
+                                                    TextSpan(
+                                                      text:
+                                                          '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["location"].toString().separateFirstLocation() : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["location"].toString().separateFirstLocation() : ""}',
+                                                      style: TextStyle(
+                                                        color:
+                                                            Color(0xFFC9C8C8),
+                                                        fontSize: 14,
+                                                        fontFamily: 'Roboto',
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        height: 0,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 12, left: 12),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                      "assets/images/icons/map_icon.svg"),
+                                                  SizedBox(
+                                                    width: width * .015,
                                                   ),
-                                                  TextSpan(
-                                                    text:
-                                                        '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["location"].toString().separateFirstLocation() : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["location"].toString().separateFirstLocation() : ""}',
+                                                  Text(
+                                                    '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["location"].toString().listMarksRemover : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["location"].toString().listMarksRemover : ""}',
                                                     style: TextStyle(
                                                       color: Color(0xFFC9C8C8),
                                                       fontSize: 14,
                                                       fontFamily: 'Roboto',
                                                       fontWeight:
-                                                          FontWeight.w500,
+                                                          FontWeight.w400,
                                                       height: 0,
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 12, left: 12),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                SvgPicture.asset(
-                                                    "assets/images/icons/map_icon.svg"),
-                                                SizedBox(
-                                                  width: width * .015,
-                                                ),
-                                                Text(
-                                                  '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["location"].toString().listMarksRemover : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["location"].toString().listMarksRemover : ""}',
-                                                  style: TextStyle(
-                                                    color: Color(0xFFC9C8C8),
-                                                    fontSize: 14,
-                                                    fontFamily: 'Roboto',
-                                                    fontWeight: FontWeight.w400,
-                                                    height: 0,
+                                              Row(
+                                                children: [
+                                                  SvgPicture.asset(
+                                                      "assets/images/icons/star_icon.svg"),
+                                                  SizedBox(
+                                                    width: width * .015,
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                SvgPicture.asset(
-                                                    "assets/images/icons/star_icon.svg"),
-                                                SizedBox(
-                                                  width: width * .015,
-                                                ),
-                                                Text(
-                                                  '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["rating"] : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["rating"] : ""}',
-                                                  style: TextStyle(
-                                                    color: Color(0xFFC9C8C8),
-                                                    fontSize: 14,
-                                                    fontFamily: 'Roboto',
-                                                    fontWeight: FontWeight.w400,
-                                                    height: 0,
+                                                  Text(
+                                                    '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["rating"] : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["rating"] : ""}',
+                                                    style: TextStyle(
+                                                      color: Color(0xFFC9C8C8),
+                                                      fontSize: 14,
+                                                      fontFamily: 'Roboto',
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      height: 0,
+                                                    ),
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  width: width * .015,
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    ]),
-                                  ),
-                                  SizedBox(
-                                    height: height * .03,
-                                  ),
-                                ]),
-                              ),
-                            ],
+                                                  SizedBox(
+                                                    width: width * .015,
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ]),
+                                    ),
+                                    SizedBox(
+                                      height: height * .03,
+                                    ),
+                                  ]),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

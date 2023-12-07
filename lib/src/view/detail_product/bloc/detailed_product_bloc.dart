@@ -4,7 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:traveloi/src/config/global/global.dart';
-import 'package:traveloi/src/controller/detailed_controller/detailed_controller.dart';
+
+import 'package:traveloi/src/controller/detailed_product_controller/detailed_product_controller.dart';
+import 'package:traveloi/src/view/booked/booked_scree.dart';
 import 'package:traveloi/src/view/detail_product/widget/dialog/booking_dialog.dart';
 
 part 'detailed_product_event.dart';
@@ -18,6 +20,8 @@ class DetailedProductBloc
     on<DetailProductBookingEvent>(detailProductBookingEvent);
     on<DetailedProductSelectDateEvent>(detailedProductSelectDateEvent);
     on<DetailedProductSelectPersonEvent>(detailedProductSelectPersonEvent);
+    on<DetailedProductBookTravel>(detailedProductBookTravel);
+    on<DetailedProductBackNavigatorEvent>(detailedProductBackNavigatorEvent);
   }
 
   FutureOr<void> detailedProductGetAProductEvent(
@@ -45,6 +49,7 @@ class DetailedProductBloc
         builder: (context) => AlertDialog(
               content: BookingDialog(
                 detailedProductBloc: event.detailedProductBloc,
+                placeId: event.productId,
               ),
             ));
   }
@@ -69,5 +74,38 @@ class DetailedProductBloc
       Emitter<DetailedProductState> emit) {
     DetailedProductController.person = event.person;
     emit(DetailedProductSelectPersonState(person: event.person));
+  }
+
+  FutureOr<void> detailedProductBookTravel(DetailedProductBookTravel event,
+      Emitter<DetailedProductState> emit) async {
+    if (DetailedProductController.datetime != null &&
+        DetailedProductController.person != null) {
+      emit(DetailedProductLoadingState());
+      var travelResponse =
+          await DetailedProductController().bookATravel(event.placeId);
+      if (travelResponse == true) {
+        Navigator.pushAndRemoveUntil(
+            event.context,
+            MaterialPageRoute(builder: (context) => BookedScreen()),
+            (route) => false);
+      } else if (travelResponse is String) {
+        Navigator.pop(event.context);
+        emit(DetailedProductMsgState(msg: travelResponse, isError: true));
+      } else {
+        Navigator.pop(event.context);
+        emit(DetailedProductMsgState(
+            msg: "Something went wrong", isError: true));
+      }
+    } else {
+      Navigator.pop(event.context);
+      emit(DetailedProductMsgState(
+          msg: "Date or person cannot be empty", isError: true));
+    }
+  }
+
+  FutureOr<void> detailedProductBackNavigatorEvent(
+      DetailedProductBackNavigatorEvent event,
+      Emitter<DetailedProductState> emit) {
+    Navigator.pop(event.context);
   }
 }

@@ -14,11 +14,13 @@ class DetailProductBookingEvent extends DetailedProductEvent {
   final BuildContext context;
   final DetailedProductBloc detailedProductBloc;
   final int? currentSelectedPerson;
+  final String productId;
 
   DetailProductBookingEvent(
       {required this.context,
       required this.detailedProductBloc,
-      required this.currentSelectedPerson});
+      required this.currentSelectedPerson,
+      required this.productId});
 }
 
 class DetailedProductSelectDateEvent extends DetailedProductEvent {
@@ -31,4 +33,16 @@ class DetailedProductSelectDateEvent extends DetailedProductEvent {
 class DetailedProductSelectPersonEvent extends DetailedProductEvent {
   final int person;
   DetailedProductSelectPersonEvent({required this.person});
+}
+
+class DetailedProductBookTravel extends DetailedProductEvent {
+  final BuildContext context;
+  final String placeId;
+  DetailedProductBookTravel({required this.context, required this.placeId});
+}
+
+class DetailedProductBackNavigatorEvent extends DetailedProductEvent {
+  final BuildContext context;
+
+  DetailedProductBackNavigatorEvent({required this.context});
 }

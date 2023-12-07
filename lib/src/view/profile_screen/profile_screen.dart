@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:traveloi/src/config/utils.dart';
+import 'package:traveloi/src/view/profile_screen/bloc/profile_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -9,6 +10,19 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  ProfileBloc profileBloc = ProfileBloc();
+  @override
+  void initState() {
+    profileBloc.add(ProfileGetUserDetailEvent(context: context));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    profileBloc.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:traveloi/src/config/extention/string_extentions.dart';
 import 'package:traveloi/src/config/global/global.dart';
-import 'package:traveloi/src/controller/detailed_controller/detailed_controller.dart';
+
+import 'package:traveloi/src/controller/detailed_product_controller/detailed_product_controller.dart';
 import 'package:traveloi/src/view/detail_product/bloc/detailed_product_bloc.dart';
 
 class DetailProductWidget extends StatelessWidget {
   final DetailedProductGetAProductState state;
   final DetailedProductBloc detailedProductBloc;
+  final String placeId;
   const DetailProductWidget(
-      {super.key, required this.state, required this.detailedProductBloc});
+      {super.key,
+      required this.state,
+      required this.detailedProductBloc,
+      required this.placeId});
 
   @override
   Widget build(BuildContext context) {
@@ -58,19 +63,27 @@ class DetailProductWidget extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                            width: width * .1,
-                            height: height * .1,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color.fromRGBO(29, 29, 29, 0.40),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 7),
-                              child: Icon(Icons.arrow_back_ios,
-                                  color: Color.fromRGBO(225, 225, 225, 1)),
-                            )),
+                        GestureDetector(
+                          onTap: () {
+                            detailedProductBloc.add(
+                                DetailedProductBackNavigatorEvent(
+                                    context: context));
+                            ;
+                          },
+                          child: Container(
+                              width: width * .1,
+                              height: height * .1,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color.fromRGBO(29, 29, 29, 0.40),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 7),
+                                child: Icon(Icons.arrow_back_ios,
+                                    color: Color.fromRGBO(225, 225, 225, 1)),
+                              )),
+                        ),
                         Container(
                             width: width * .1,
                             height: height * .1,
@@ -381,7 +394,8 @@ class DetailProductWidget extends StatelessWidget {
             detailedProductBloc.add(DetailProductBookingEvent(
                 context: context,
                 detailedProductBloc: detailedProductBloc,
-                currentSelectedPerson: DetailedProductController.person));
+                currentSelectedPerson: DetailedProductController.person,
+                productId: placeId));
           },
           child: Container(
             width: width * .87,

@@ -65,6 +65,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                     return DetailProductWidget(
                       state: state,
                       detailedProductBloc: detailedProductBloc,
+                      placeId: widget.productId,
                     );
                   }
 
