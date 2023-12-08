@@ -11,6 +11,8 @@ final class ProfileMsgState extends ProfileState {
   ProfileMsgState({required this.isError, required this.msg});
 }
 
+final class ProfileLoadingState extends ProfileState {}
+
 final class ProfileGetUserDetailState extends ProfileState {
   final Map<String, dynamic> userData;
   ProfileGetUserDetailState({required this.userData});
