@@ -53,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                              CircleAvatar(
+                              const CircleAvatar(
                                 radius: 35,
                               ),
                               SizedBox(
@@ -61,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               Text(
                                 state.userData["name"],
-                                style: TextStyle(fontSize: 32),
+                                style: const TextStyle(fontSize: 32),
                               ),
                             ])),
                         Expanded(
@@ -80,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 decoration: BoxDecoration(
                                     color: appColorThird,
                                     borderRadius: BorderRadius.circular(18)),
-                                child: Text(
+                                child: const Text(
                                   "Logout",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 17),
@@ -101,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 }
               default:
                 {
-                  return SizedBox();
+                  return const SizedBox();
                 }
             }
           },

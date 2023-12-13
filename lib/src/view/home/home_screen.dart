@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:traveloi/src/config/extention/string_extentions.dart';
 import 'package:traveloi/src/config/utils.dart';
-import 'package:traveloi/src/controller/home_controller/home_controller.dart';
 import 'package:traveloi/src/view/home/bloc/home_bloc.dart';
 import 'package:traveloi/src/view/home/widget/productListWidget.dart';
 import 'package:traveloi/src/view/home/widget/profile_widget.dart';
@@ -68,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     border:
-                                        Border.all(color: Color(0xffD2D2D2))),
+                                        Border.all(color: const Color(0xffD2D2D2))),
                                 child: Row(children: [
                                   SizedBox(
                                     width: width * .05,
@@ -76,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Container(
                                     width: width * .65,
                                     height: height * .05,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color: Colors.white,
                                         border: Border(
                                             right: BorderSide(
@@ -97,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           hintStyle: TextStyle(
                                               color: Colors.black
                                                   .withOpacity(0.35)),
-                                          contentPadding: EdgeInsets.symmetric(
+                                          contentPadding: const EdgeInsets.symmetric(
                                               vertical: 10)),
                                     ),
                                   ),
@@ -114,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Padding(
                               padding: const EdgeInsets.only(left: 30),
-                              child: Container(
+                              child: SizedBox(
                                   height: height * .1,
                                   child: Row(
                                     children: [
@@ -128,16 +126,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 color: Colors.black
                                                     .withOpacity(0.24),
                                                 spreadRadius: 0.050,
-                                                offset: Offset(0, 4),
+                                                offset: const Offset(0, 4),
                                                 blurRadius: 6,
                                               )
                                             ],
-                                            color: Color(0xFF2E2E2E),
+                                            color: const Color(0xFF2E2E2E),
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         child: Text(
                                           popularPlaceList,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 16,
                                             fontFamily: 'Roboto',
@@ -169,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     default:
                       {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                   }
                 },

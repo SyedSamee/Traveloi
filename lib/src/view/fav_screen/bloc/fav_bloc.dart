@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:traveloi/src/config/global/global.dart';
 import 'package:traveloi/src/controller/fav_controller/fav_controller.dart';
 
@@ -25,11 +24,11 @@ class FavBloc extends Bloc<FavEvent, FavState> {
       if (favResponse is List<Map<String, dynamic>>) {
         emit(FavProductState(products: favResponse));
       } else if (favResponse is String) {
-        emit(FavProductState(products: []));
+        emit(FavProductState(products: const []));
         emit(FavMsgState(isError: true, msg: favResponse));
       } else {
         emit(FavMsgState(isError: true, msg: "Something went wrong"));
-        emit(FavProductState(products: []));
+        emit(FavProductState(products: const []));
       }
     }
   }

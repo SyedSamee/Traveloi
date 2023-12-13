@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:traveloi/src/config/global/global.dart';
 import 'package:traveloi/src/controller/booking_detail_controller/booking_detail_controller.dart';
 
@@ -27,11 +26,11 @@ class BookingDetailBloc extends Bloc<BookingDetailEvent, BookingDetailState> {
       if (booksResponse is List<Map<String, dynamic>>) {
         emit(BookingDetailGetAllBooksState(allBooks: booksResponse));
       } else if (booksResponse is String) {
-        emit(BookingDetailGetAllBooksState(allBooks: []));
+        emit(BookingDetailGetAllBooksState(allBooks: const []));
         emit(BookingDetailMsgState(isError: true, msg: booksResponse));
       } else {
         emit(BookingDetailMsgState(isError: true, msg: "Something went wrong"));
-        emit(BookingDetailGetAllBooksState(allBooks: []));
+        emit(BookingDetailGetAllBooksState(allBooks: const []));
       }
     }
   }

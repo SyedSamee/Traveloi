@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traveloi/src/config/extention/string_extentions.dart';
-import 'package:traveloi/src/config/global/global.dart';
 
 class HomeController {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;

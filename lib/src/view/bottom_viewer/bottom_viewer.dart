@@ -35,7 +35,7 @@ class _BottomViewerState extends State<BottomViewer> {
           buildWhen: (previous, current) => current is BottomViewerInitial,
           builder: (context, state) {
             state as BottomViewerInitial;
-            return Container(
+            return SizedBox(
               width: width,
               height: height * .065,
               child: Row(
@@ -51,11 +51,11 @@ class _BottomViewerState extends State<BottomViewer> {
                         SvgPicture.asset("assets/images/icons/icon_home.svg"),
                         SizedBox(height: height * .01),
                         state.currentPage == 0
-                            ? CircleAvatar(
+                            ? const CircleAvatar(
                                 backgroundColor: Colors.red,
                                 radius: 3,
                               )
-                            : SizedBox()
+                            : const SizedBox()
                       ]),
                     ),
                     GestureDetector(
@@ -68,11 +68,11 @@ class _BottomViewerState extends State<BottomViewer> {
                         SvgPicture.asset("assets/images/icons/icon_clock.svg"),
                         SizedBox(height: height * .01),
                         state.currentPage == 1
-                            ? CircleAvatar(
+                            ? const CircleAvatar(
                                 backgroundColor: Colors.red,
                                 radius: 3,
                               )
-                            : SizedBox()
+                            : const SizedBox()
                       ]),
                     ),
                     GestureDetector(
@@ -85,11 +85,11 @@ class _BottomViewerState extends State<BottomViewer> {
                         SvgPicture.asset("assets/images/icons/icon_heart.svg"),
                         SizedBox(height: height * .01),
                         state.currentPage == 2
-                            ? CircleAvatar(
+                            ? const CircleAvatar(
                                 backgroundColor: Colors.red,
                                 radius: 3,
                               )
-                            : SizedBox()
+                            : const SizedBox()
                       ]),
                     ),
                     GestureDetector(
@@ -104,11 +104,11 @@ class _BottomViewerState extends State<BottomViewer> {
                         ),
                         SizedBox(height: height * .01),
                         state.currentPage == 3
-                            ? CircleAvatar(
+                            ? const CircleAvatar(
                                 backgroundColor: Colors.red,
                                 radius: 3,
                               )
-                            : SizedBox()
+                            : const SizedBox()
                       ]),
                     ),
                   ]),
@@ -123,9 +123,9 @@ class _BottomViewerState extends State<BottomViewer> {
           },
           children: [
             HomeScreen(homeBloc: homeBloc),
-            BookingDetailScreen(),
-            FavScreen(),
-            ProfileScreen()
+            const BookingDetailScreen(),
+            const FavScreen(),
+            const ProfileScreen()
           ],
         ));
   }

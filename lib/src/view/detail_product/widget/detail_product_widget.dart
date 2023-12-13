@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:traveloi/src/config/extention/string_extentions.dart';
-import 'package:traveloi/src/config/global/global.dart';
 
 import 'package:traveloi/src/controller/detailed_product_controller/detailed_product_controller.dart';
 import 'package:traveloi/src/view/detail_product/bloc/detailed_product_bloc.dart';
@@ -26,7 +25,7 @@ class DetailProductWidget extends StatelessWidget {
         SizedBox(
           height: height * .03,
         ),
-        Container(
+        SizedBox(
           width: width * .87,
           height: height * .55,
           child: Stack(
@@ -41,7 +40,7 @@ class DetailProductWidget extends StatelessWidget {
                       BoxDecoration(color: Colors.transparent, boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.45),
-                      offset: Offset(0, 6),
+                      offset: const Offset(0, 6),
                       blurRadius: 20,
                     )
                   ]),
@@ -68,18 +67,17 @@ class DetailProductWidget extends StatelessWidget {
                             detailedProductBloc.add(
                                 DetailedProductBackNavigatorEvent(
                                     context: context));
-                            ;
                           },
                           child: Container(
                               width: width * .1,
                               height: height * .1,
                               alignment: Alignment.center,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Color.fromRGBO(29, 29, 29, 0.40),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 7),
+                              child: const Padding(
+                                padding: EdgeInsets.only(left: 7),
                                 child: Icon(Icons.arrow_back_ios,
                                     color: Color.fromRGBO(225, 225, 225, 1)),
                               )),
@@ -88,7 +86,7 @@ class DetailProductWidget extends StatelessWidget {
                             width: width * .1,
                             height: height * .1,
                             alignment: Alignment.center,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: Color.fromRGBO(29, 29, 29, 0.40),
                             ),
@@ -101,13 +99,13 @@ class DetailProductWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     width: width * .77,
                     height: height * .12,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      color: Color.fromRGBO(29, 29, 29, 0.40),
+                      color: const Color.fromRGBO(29, 29, 29, 0.40),
                     ),
                     child: Column(children: [
                       Padding(
@@ -118,7 +116,7 @@ class DetailProductWidget extends StatelessWidget {
                           children: [
                             Text(
                               '${state.productDetail["name"]}, ',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
                                 fontFamily: 'Roboto',
@@ -126,7 +124,7 @@ class DetailProductWidget extends StatelessWidget {
                                 height: 0,
                               ),
                             ),
-                            Text(
+                            const Text(
                               'Price',
                               style: TextStyle(
                                 color: Color(0xFFC9C8C8),
@@ -153,8 +151,8 @@ class DetailProductWidget extends StatelessWidget {
                                   width: width * .015,
                                 ),
                                 Text(
-                                  '${state.productDetail["location"].toString().listMarksRemover}',
-                                  style: TextStyle(
+                                  state.productDetail["location"].toString().listMarksRemover,
+                                  style: const TextStyle(
                                     color: Color(0xFFC9C8C8),
                                     fontSize: 14,
                                     fontFamily: 'Roboto',
@@ -167,7 +165,7 @@ class DetailProductWidget extends StatelessWidget {
                             Row(
                               children: [
                                 Text.rich(TextSpan(children: [
-                                  TextSpan(
+                                  const TextSpan(
                                     text: '\$',
                                     style: TextStyle(
                                       color: Color(0xFF424242),
@@ -179,7 +177,7 @@ class DetailProductWidget extends StatelessWidget {
                                   ),
                                   TextSpan(
                                     text: '${state.productDetail["price"]}',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Color(0xFFC9C8C8),
                                       fontSize: 26,
                                       fontFamily: 'Roboto',
@@ -203,11 +201,11 @@ class DetailProductWidget extends StatelessWidget {
             ],
           ),
         ),
-        Container(
+        SizedBox(
           width: width * .87,
           child: Row(
             children: [
-              Text(
+              const Text(
                 'Overview',
                 style: TextStyle(
                   color: Color(0xFF1B1B1B),
@@ -220,7 +218,7 @@ class DetailProductWidget extends StatelessWidget {
               SizedBox(
                 width: width * .05,
               ),
-              Text('Details',
+              const Text('Details',
                   style: TextStyle(
                     color: Color(0x9E1B1B1B),
                     fontSize: 16,
@@ -234,7 +232,7 @@ class DetailProductWidget extends StatelessWidget {
         SizedBox(
           height: height * .03,
         ),
-        Container(
+        SizedBox(
           width: width * .87,
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -244,7 +242,7 @@ class DetailProductWidget extends StatelessWidget {
                   width: width * .08,
                   height: height * .035,
                   decoration: ShapeDecoration(
-                    color: Color(0xFFECECEC),
+                    color: const Color(0xFFECECEC),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6)),
                   ),
@@ -260,7 +258,7 @@ class DetailProductWidget extends StatelessWidget {
                 ),
                 Text(
                   '${state.productDetail["hour"]} hours',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xFF7E7E7E),
                     fontSize: 16,
                     fontFamily: 'Roboto',
@@ -276,7 +274,7 @@ class DetailProductWidget extends StatelessWidget {
                   width: width * .08,
                   height: height * .035,
                   decoration: ShapeDecoration(
-                    color: Color(0xFFECECEC),
+                    color: const Color(0xFFECECEC),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6)),
                   ),
@@ -292,7 +290,7 @@ class DetailProductWidget extends StatelessWidget {
                 ),
                 Text(
                   '${state.productDetail["weather"]}  C',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xFF7E7E7E),
                     fontSize: 16,
                     fontFamily: 'Roboto',
@@ -308,7 +306,7 @@ class DetailProductWidget extends StatelessWidget {
                   width: width * .08,
                   height: height * .035,
                   decoration: ShapeDecoration(
-                    color: Color(0xFFECECEC),
+                    color: const Color(0xFFECECEC),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6)),
                   ),
@@ -324,7 +322,7 @@ class DetailProductWidget extends StatelessWidget {
                 ),
                 Text(
                   '${state.productDetail["rating"]}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xFF7E7E7E),
                     fontSize: 16,
                     fontFamily: 'Roboto',
@@ -339,7 +337,7 @@ class DetailProductWidget extends StatelessWidget {
         SizedBox(
           height: height * .03,
         ),
-        Container(
+        SizedBox(
           width: width * .87,
           height: state.productDetail["hour"].toString().length < 40
               ? height * .09
@@ -351,13 +349,13 @@ class DetailProductWidget extends StatelessWidget {
                   Container(
                     width: width * .87,
                     height: height * .13,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                     ),
                     child: SingleChildScrollView(
                       child: Text(
                         '${state.productDetail["description"]}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFFA4A4A4),
                           fontSize: 18,
                           fontFamily: 'Roboto',
@@ -373,7 +371,7 @@ class DetailProductWidget extends StatelessWidget {
                 child: Container(
                   width: width * .9,
                   height: height * .04,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.transparent,
                       boxShadow: [
                         BoxShadow(
@@ -404,8 +402,8 @@ class DetailProductWidget extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
-              color: Color(0xFF1A1A1A),
-              shadows: [
+              color: const Color(0xFF1A1A1A),
+              shadows: const [
                 BoxShadow(
                   color: Color(0x1E000000),
                   blurRadius: 26,
@@ -415,7 +413,7 @@ class DetailProductWidget extends StatelessWidget {
               ],
             ),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text(
+              const Text(
                 'Book Now',
                 textAlign: TextAlign.center,
                 style: TextStyle(

@@ -9,7 +9,7 @@ class DetailedProductController {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
     try {
-      var booking_request_response = await firebaseFirestore
+      var bookingRequestResponse = await firebaseFirestore
           .collection("users")
           .doc(sharedPreferences.getString("userId"))
           .collection("Booking_requests")
@@ -19,7 +19,7 @@ class DetailedProductController {
         "person": person,
       });
 
-      if (booking_request_response.id != null) {
+      if (bookingRequestResponse.id != null) {
         return true;
       } else {
         return false;

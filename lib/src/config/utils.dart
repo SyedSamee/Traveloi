@@ -1,11 +1,10 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-Color appColorFirst = Color(0xff0172B2);
+Color appColorFirst = const Color(0xff0172B2);
 
-Color appColorSec = Color(0xff001645);
-Color appColorThird = Color(0xffFF0000);
+Color appColorSec = const Color(0xff001645);
+Color appColorThird = const Color(0xffFF0000);
 
 String popularPlaceList = "All Places";
 
@@ -17,13 +16,13 @@ ThemeData appTheme = ThemeData(
     useMaterial3: true,
     splashColor: Colors.transparent);
 
-CircularProgressIndicator loadingIndicator = CircularProgressIndicator();
+CircularProgressIndicator loadingIndicator = const CircularProgressIndicator();
 
 messenger(BuildContext context, String msg, bool isError) {
   return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Text(
       msg,
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.white,
       ),
     ),
@@ -36,13 +35,13 @@ defaultIndicator(String? msg) {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CircularProgressIndicator(),
+        const CircularProgressIndicator(),
         msg != null
             ? Text(
                 msg,
-                style: TextStyle(fontWeight: FontWeight.w500),
+                style: const TextStyle(fontWeight: FontWeight.w500),
               )
-            : SizedBox()
+            : const SizedBox()
       ],
     ),
   );

@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traveloi/src/config/global/global.dart';
 import 'package:traveloi/src/controller/profile_controller/profile_controller.dart';
 

@@ -31,9 +31,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (globalResponse is Map<String, dynamic>) {
         emit(HomeInitState(
             name: globalResponse["name"],
-            profileImg: globalResponse["profileImage"] == null
-                ? noProfileImage
-                : globalResponse["profileImage"]));
+            profileImg: globalResponse["profileImage"] ?? noProfileImage));
         event.homeBloc.add(HomeGetAllProductsEvent(context: event.context));
       } else if (globalResponse is String) {
         //emit msg state

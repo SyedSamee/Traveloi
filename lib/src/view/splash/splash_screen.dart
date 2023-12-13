@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:traveloi/src/config/utils.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:traveloi/src/view/splash/bloc/splash_bloc.dart';
@@ -48,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Travel',
                 style: TextStyle(
                   color: Colors.white,
@@ -70,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
           SizedBox(
             height: screenHeight * .07,
           ),
-          Text(
+          const Text(
             "Find Your Dream",
             style: TextStyle(
               color: Color(0xFFE7E7E7),
@@ -83,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
           SizedBox(
             height: screenHeight * .04,
           ),
-          Text(
+          const Text(
             "Destination With Us  ",
             style: TextStyle(
               color: Color(0xFFE7E7E7),

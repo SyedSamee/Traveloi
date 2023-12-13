@@ -36,8 +36,8 @@ class FavScreenState extends State<FavScreen> {
         children: [
           Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 14),
                 child: Row(
                   children: [
                     Text(
@@ -89,7 +89,7 @@ class FavScreenState extends State<FavScreen> {
                                         width: width * .51,
                                         height: height * .3,
                                         decoration: BoxDecoration(
-                                            image: DecorationImage(
+                                            image: const DecorationImage(
                                                 image: AssetImage(
                                                   "assets/images/product_image.png",
                                                 ),
@@ -97,7 +97,7 @@ class FavScreenState extends State<FavScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         child: Column(children: [
-                                          Expanded(child: SizedBox()),
+                                          const Expanded(child: SizedBox()),
                                           Expanded(
                                             child: SizedBox(
                                               child: Column(
@@ -108,7 +108,7 @@ class FavScreenState extends State<FavScreen> {
                                                       width: width,
                                                       height: height * .075,
                                                       decoration: BoxDecoration(
-                                                          color: Color.fromRGBO(
+                                                          color: const Color.fromRGBO(
                                                               29, 29, 29, 0.40),
                                                           borderRadius:
                                                               BorderRadius
@@ -127,7 +127,7 @@ class FavScreenState extends State<FavScreen> {
                                                                 Text(
                                                                   '${state.products[index]["name"]}',
                                                                   style:
-                                                                      TextStyle(
+                                                                      const TextStyle(
                                                                     color: Colors
                                                                         .white,
                                                                     fontSize:
@@ -143,7 +143,7 @@ class FavScreenState extends State<FavScreen> {
                                                                 Text(
                                                                   '${state.products[index]["price"]}',
                                                                   style:
-                                                                      TextStyle(
+                                                                      const TextStyle(
                                                                     color: Color(
                                                                         0xFFC9C8C8),
                                                                     fontSize:
@@ -173,7 +173,7 @@ class FavScreenState extends State<FavScreen> {
                                                                           width *
                                                                               .01,
                                                                     ),
-                                                                    Text(
+                                                                    const Text(
                                                                       'South, America',
                                                                       style:
                                                                           TextStyle(
@@ -191,7 +191,7 @@ class FavScreenState extends State<FavScreen> {
                                                                     ),
                                                                   ],
                                                                 ),
-                                                                Text.rich(
+                                                                const Text.rich(
                                                                   TextSpan(
                                                                     children: [
                                                                       TextSpan(
@@ -245,7 +245,7 @@ class FavScreenState extends State<FavScreen> {
                                       ),
                                     );
                                   })
-                              : Text(
+                              : const Text(
                                   "No Product found",
                                   style: TextStyle(
                                       fontSize: 17,
@@ -256,7 +256,7 @@ class FavScreenState extends State<FavScreen> {
 
                     default:
                       {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                   }
                 },

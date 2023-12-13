@@ -41,7 +41,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               child: SizedBox(
                 width: width * .94,
-                child: Text(
+                child: const Text(
                   "Your books",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
@@ -70,7 +70,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                   case BookingDetailGetAllBooksState:
                     {
                       state as BookingDetailGetAllBooksState;
-                      return Container(
+                      return SizedBox(
                         width: width,
                         height: height * .63,
                         child: ListView.builder(
@@ -92,7 +92,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(12),
-                                              image: DecorationImage(
+                                              image: const DecorationImage(
                                                   image: AssetImage(
                                                     "assets/images/product_image.png",
                                                   ),
@@ -101,7 +101,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                                         SizedBox(
                                           width: width * .03,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: width * .6,
                                           child: Row(
                                               mainAxisAlignment:
@@ -110,12 +110,12 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                                               children: [
                                                 Column(
                                                   children: [
-                                                    Container(
+                                                    SizedBox(
                                                       width: width * .46,
                                                       child: Text(
                                                         state.allBooks[index]
                                                             ["name"],
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 20,
                                                             fontWeight:
                                                                 FontWeight
@@ -125,14 +125,14 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                                                     SizedBox(
                                                       height: height * .01,
                                                     ),
-                                                    Container(
+                                                    SizedBox(
                                                       width: width * .46,
                                                       child: Text(
                                                         state.allBooks[index]
                                                                 ["location"]
                                                             .toString()
                                                             .listMarksRemover,
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight
@@ -144,7 +144,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
                                                 Text(
                                                   state.allBooks[index]
                                                       ["price"],
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontSize: 16,
                                                       fontWeight:
                                                           FontWeight.bold),
@@ -162,7 +162,7 @@ class _BookingDetailScreenState extends State<BookingDetailScreen> {
 
                   default:
                     {
-                      return SizedBox();
+                      return const SizedBox();
                     }
                 }
               },

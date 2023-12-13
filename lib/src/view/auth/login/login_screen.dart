@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Travel',
                     style: TextStyle(
                       color: Colors.black,
@@ -63,14 +63,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: screenWidth * .8,
                 height: screenHeight * .065,
                 decoration: ShapeDecoration(
-                  color: Color(0xFFE3F5FF).withOpacity(0.5),
+                  color: const Color(0xFFE3F5FF).withOpacity(0.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
                 ),
                 child: TextField(
                     controller: email,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 15),
                         hintText: "Email",
                         hintStyle: TextStyle(color: Colors.black),
@@ -83,14 +83,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: screenWidth * .8,
                 height: screenHeight * .065,
                 decoration: ShapeDecoration(
-                  color: Color(0xFFE3F5FF).withOpacity(0.5),
+                  color: const Color(0xFFE3F5FF).withOpacity(0.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
                 ),
                 child: TextField(
                     controller: password,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 15),
                         hintText: "Password",
                         hintStyle: TextStyle(color: Colors.black),
@@ -119,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   email: email.text,
                                   password: password.text));
                             },
-                            child: Icon(Icons.arrow_forward_ios));
+                            child: const Icon(Icons.arrow_forward_ios));
                       }
 
                     case LoginLoadingState:
@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     default:
                       {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                   }
                 },

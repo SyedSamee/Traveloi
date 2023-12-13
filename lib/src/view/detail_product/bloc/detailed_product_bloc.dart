@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:traveloi/src/config/global/global.dart';
 
 import 'package:traveloi/src/controller/detailed_product_controller/detailed_product_controller.dart';
@@ -86,7 +85,7 @@ class DetailedProductBloc
       if (travelResponse == true) {
         Navigator.pushAndRemoveUntil(
             event.context,
-            MaterialPageRoute(builder: (context) => BookedScreen()),
+            MaterialPageRoute(builder: (context) => const BookedScreen()),
             (route) => false);
       } else if (travelResponse is String) {
         Navigator.pop(event.context);

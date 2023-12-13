@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traveloi/src/config/utils.dart';
 import 'package:traveloi/src/view/home/bloc/home_bloc.dart';
-import 'package:traveloi/src/view/home/home_screen.dart';
 
 class ProfileWidget extends StatelessWidget {
   const ProfileWidget({
@@ -50,14 +49,14 @@ class ProfileWidget extends StatelessWidget {
                           children: [
                             Text(
                               "Hi, ${state.name} 👋",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFF2E2E2E),
                                 fontSize: 30,
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            Text(
+                            const Text(
                               "Explore the world",
                               style: TextStyle(
                                 color: Color(0xFF888888),
@@ -83,7 +82,7 @@ class ProfileWidget extends StatelessWidget {
 
           default:
             {
-              return SizedBox();
+              return const SizedBox();
             }
         }
       },

@@ -37,7 +37,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Travel',
                     style: TextStyle(
                       color: Colors.black,
@@ -64,14 +64,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 width: screenWidth * .8,
                 height: screenHeight * .065,
                 decoration: ShapeDecoration(
-                  color: Color(0xFFE3F5FF).withOpacity(0.5),
+                  color: const Color(0xFFE3F5FF).withOpacity(0.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
                 ),
                 child: TextField(
                     controller: fullName,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 15),
                         // contentPadding: EdgeInsets.symmetric(horizontal: 15),
                         hintText: "Full name",
@@ -85,14 +85,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 width: screenWidth * .8,
                 height: screenHeight * .065,
                 decoration: ShapeDecoration(
-                  color: Color(0xFFE3F5FF).withOpacity(0.5),
+                  color: const Color(0xFFE3F5FF).withOpacity(0.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
                 ),
                 child: TextField(
                     controller: email,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 15),
                         // contentPadding: EdgeInsets.symmetric(horizontal: 15),
                         hintText: "Email",
@@ -106,14 +106,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 width: screenWidth * .8,
                 height: screenHeight * .065,
                 decoration: ShapeDecoration(
-                  color: Color(0xFFE3F5FF).withOpacity(0.5),
+                  color: const Color(0xFFE3F5FF).withOpacity(0.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
                 ),
                 child: TextField(
                     controller: password,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 15),
                         hintText: "Password",
                         hintStyle: TextStyle(color: Colors.black),
@@ -145,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   email: email.text,
                                   password: password.text));
                             },
-                            child: Icon(Icons.arrow_forward_ios));
+                            child: const Icon(Icons.arrow_forward_ios));
                       }
                     case RegisterLoadingState:
                       {
@@ -153,7 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }
                     default:
                       {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                   }
                 },

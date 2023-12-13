@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:traveloi/src/config/extention/string_extentions.dart';
@@ -9,7 +8,7 @@ class ProductList extends StatefulWidget {
   final HomeGetAllProductsState? productsState;
   final HomeBloc homeBloc;
   const ProductList(
-      {this.productsState, this.searchState, required this.homeBloc});
+      {super.key, this.productsState, this.searchState, required this.homeBloc});
 
   @override
   State<ProductList> createState() => _ProductListState();
@@ -20,12 +19,12 @@ class _ProductListState extends State<ProductList> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return Container(
+    return SizedBox(
         width: width,
         height: height * .43,
         child: widget.searchState != null &&
                 widget.searchState?.products == null
-            ? Center(
+            ? const Center(
                 child: Text("No product found"),
               )
             : ListView.builder(
@@ -45,7 +44,7 @@ class _ProductListState extends State<ProductList> {
                                 productId: widget.productsState?.products[index]
                                     ["product_id"]));
                           },
-                          child: Container(
+                          child: SizedBox(
                             width: width * .58,
                             height: height * .5,
                             child: Stack(
@@ -62,7 +61,7 @@ class _ProductListState extends State<ProductList> {
                                           BoxShadow(
                                             color:
                                                 Colors.black.withOpacity(0.45),
-                                            offset: Offset(0, 6),
+                                            offset: const Offset(0, 6),
                                             blurRadius: 20,
                                           )
                                         ]),
@@ -72,7 +71,7 @@ class _ProductListState extends State<ProductList> {
                                   width: width * .58,
                                   height: height * .4,
                                   decoration: BoxDecoration(
-                                      image: DecorationImage(
+                                      image: const DecorationImage(
                                           image: AssetImage(
                                             "assets/images/product_image.png",
                                           ),
@@ -116,7 +115,7 @@ class _ProductListState extends State<ProductList> {
                                                         isSearchState: true));
                                               },
                                               child: CircleAvatar(
-                                                backgroundColor: Color.fromRGBO(
+                                                backgroundColor: const Color.fromRGBO(
                                                     29, 29, 29, 0.40),
                                                 child: SvgPicture.asset(
                                                     "assets/images/icons/heart_icon.svg",
@@ -142,13 +141,13 @@ class _ProductListState extends State<ProductList> {
                                         ],
                                       ),
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     Container(
                                       width: width * .47,
                                       height: height * .095,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        color: Color.fromRGBO(29, 29, 29, 0.40),
+                                        color: const Color.fromRGBO(29, 29, 29, 0.40),
                                       ),
                                       child: Column(children: [
                                         Padding(
@@ -162,7 +161,7 @@ class _ProductListState extends State<ProductList> {
                                                     TextSpan(
                                                       text:
                                                           '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["name"] : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["name"] : ""} ',
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         color: Colors.white,
                                                         fontSize: 16,
                                                         fontFamily: 'Roboto',
@@ -173,8 +172,8 @@ class _ProductListState extends State<ProductList> {
                                                     ),
                                                     TextSpan(
                                                       text:
-                                                          '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["location"].toString().separateFirstLocation() : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["location"].toString().separateFirstLocation() : ""}',
-                                                      style: TextStyle(
+                                                          widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["location"].toString().separateFirstLocation() : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["location"].toString().separateFirstLocation() : "",
+                                                      style: const TextStyle(
                                                         color:
                                                             Color(0xFFC9C8C8),
                                                         fontSize: 14,
@@ -205,8 +204,8 @@ class _ProductListState extends State<ProductList> {
                                                     width: width * .015,
                                                   ),
                                                   Text(
-                                                    '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["location"].toString().listMarksRemover : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["location"].toString().listMarksRemover : ""}',
-                                                    style: TextStyle(
+                                                    widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["location"].toString().listMarksRemover : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["location"].toString().listMarksRemover : "",
+                                                    style: const TextStyle(
                                                       color: Color(0xFFC9C8C8),
                                                       fontSize: 14,
                                                       fontFamily: 'Roboto',
@@ -226,7 +225,7 @@ class _ProductListState extends State<ProductList> {
                                                   ),
                                                   Text(
                                                     '${widget.searchState != null ? widget.searchState!.products![index]["product_detail"]["rating"] : widget.productsState != null ? widget.productsState!.products[index]["product_detail"]["rating"] : ""}',
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                       color: Color(0xFFC9C8C8),
                                                       fontSize: 14,
                                                       fontFamily: 'Roboto',

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traveloi/src/view/auth/login/login_screen.dart';
@@ -28,7 +27,7 @@ Future checkIfUserExist(BuildContext context) async {
   if (sharedPreferences.getString("userId") == null) {
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => LoginScreen()),
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
         (route) => false);
   } else {
     return true;

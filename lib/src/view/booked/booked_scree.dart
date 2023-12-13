@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:traveloi/src/view/booked/bloc/booked_bloc.dart';
 
@@ -26,7 +25,7 @@ class BookedScreenState extends State<BookedScreen> {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             "Booking Successfully",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
           ),
@@ -38,7 +37,7 @@ class BookedScreenState extends State<BookedScreen> {
                 bookedBloc
                     .add(BookedScreenHomeNavigationEvent(context: context));
               },
-              child: Text("Go to home"))
+              child: const Text("Go to home"))
         ],
       )),
     );

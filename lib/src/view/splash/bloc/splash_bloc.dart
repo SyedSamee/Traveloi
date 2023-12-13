@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:traveloi/src/view/bottom_viewer/bottom_viewer.dart';
 
@@ -23,7 +22,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     if (sharedPreferences.getString("userId") != null) {
       Navigator.pushAndRemoveUntil(
           event.context,
-          MaterialPageRoute(builder: (context) => BottomViewer()),
+          MaterialPageRoute(builder: (context) => const BottomViewer()),
           (route) => false);
       //user is logged in
     } else {

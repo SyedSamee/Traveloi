@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:traveloi/src/config/extention/string_extentions.dart';
 import 'package:traveloi/src/config/utils.dart';
 import 'package:traveloi/src/view/detail_product/bloc/detailed_product_bloc.dart';
 import 'package:traveloi/src/view/detail_product/widget/detail_product_widget.dart';
